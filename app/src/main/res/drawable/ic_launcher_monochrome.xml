@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Themed icon layer: the joystick outline, kept inside the 66dp safe zone of the 108dp icon. -->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_stat_led"
+    android:inset="30dp" />

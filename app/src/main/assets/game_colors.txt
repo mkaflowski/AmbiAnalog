@@ -1,0 +1,11 @@
+# Colors assigned to games without covers (or to override a cover), shipped with the app.
+# A colour set in the app ("Własne kolory dla tej gry") still takes precedence.
+#
+# Format: <game id> | <left> | <right> | <name, for humans>
+# Game ids: switch:<title id> (Eden etc.), rom:<system>/<path below the system folder, no
+# extension> (emulators started by Cocoon), app:<package> (Android games).
+
+switch:01007EF00011E000 | #62ff62 | #79e6ff | The Legend of Zelda: Breath of the Wild
+switch:0100F2C0115B6000 | #62ff62 | #79e6ff | The Legend of Zelda: Tears of the Kingdom
+switch:01002E7016C46000 | #ffe8c6 | #ff1111 | Cult of the Lamb
+switch:0100000000010000 | #3b38ff | #ff2525 | Super Mario Odyssey

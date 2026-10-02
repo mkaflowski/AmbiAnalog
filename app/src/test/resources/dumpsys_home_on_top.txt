@@ -1,0 +1,33 @@
+ACTIVITY MANAGER ACTIVITIES (dumpsys activity activities)
+Display #4 (activities from top to bottom):
+  * Task{607252e #19777 type=standard A=10135:com.example.thor_led_manager U=0 visible=true visibleRequested=false mode=fullscreen translucent=false sz=1}
+    mLastPausedActivity: ActivityRecord{c44025c u0 com.example.thor_led_manager/.MainActivity} t19777}
+    mLastNonFullscreenBounds=Rect(204, 62 - 1036, 1018)
+    isSleeping=true
+    * Hist  #0: ActivityRecord{c44025c u0 com.example.thor_led_manager/.MainActivity} t19777}
+      packageName=com.example.thor_led_manager processName=com.example.thor_led_manager
+      launchedFromUid=10127 launchedFromPackage=rip.moth.cocoonshell launchedFromFeature=null userId=0
+      app=ProcessRecord{d53965 29121:com.example.thor_led_manager/u0a135}
+      Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 pkg=com.example.thor_led_manager cmp=com.example.thor_led_manager/.MainActivity }
+      rootOfTask=true task=Task{607252e #19777 type=standard A=10135:com.example.thor_led_manager}
+      taskAffinity=10135:com.example.thor_led_manager
+      mActivityComponent=com.example.thor_led_manager/.MainActivity
+    Resumed: ActivityRecord{c44025c u0 com.example.thor_led_manager/.MainActivity} t19777}
+
+Display #0 (activities from top to bottom):
+
+  * Task{599e138 #1 type=home U=0 visible=true visibleRequested=false mode=fullscreen translucent=false sz=1}
+    * Task{1f368d1 #19759 type=home A=10127:rip.moth.cocoonshell U=0 rootTaskId=1 visible=true visibleRequested=false mode=fullscreen translucent=false sz=1}
+      mLastPausedActivity: ActivityRecord{401ce37 u0 rip.moth.cocoonshell/.MainActivity} t19759}
+      mLastNonFullscreenBounds=Rect(720, 117 - 1200, 1018)
+      isSleeping=true
+      * Hist  #0: ActivityRecord{401ce37 u0 rip.moth.cocoonshell/.MainActivity} t19759}
+        packageName=rip.moth.cocoonshell processName=rip.moth.cocoonshell
+        launchedFromUid=0 launchedFromPackage=null launchedFromFeature=null userId=0
+        app=ProcessRecord{71b16d3 3684:rip.moth.cocoonshell/u0a127}
+        Intent { act=android.intent.action.MAIN cat=[android.intent.category.HOME] flg=0x10000100 cmp=rip.moth.cocoonshell/.MainActivity (has extras) }
+        rootOfTask=true task=Task{1f368d1 #19759 type=home A=10127:rip.moth.cocoonshell}
+        taskAffinity=10127:rip.moth.cocoonshell
+        mActivityComponent=rip.moth.cocoonshell/.MainActivity
+        baseDir=/data/app/~~ZBogZ5eRNSniYa5_xp2VLg==/rip.moth.cocoonshell-xHvl3UIaHRkyoHEZ5_g5Sw==/base.apk
+        dataDir=/data/user/0/rip.moth.cocoonshell

@@ -1,0 +1,63 @@
+rch64/com.retroarch.browser.retroactivity.RetroActivityFuture)
+[2026-09-30 19:03:21.214] [----] ══════ Launch: Kirby Planet Robobot ══════
+[2026-09-30 19:03:21.215] [INFO] Game: Kirby Planet Robobot | File: Kirby_ Planet Robobot (CTR-P-AT3A).cci
+[2026-09-30 19:03:21.216] [INFO] ROM URI: content://com.android.externalstorage.documents/tree/3233-6631%3AROMS/document/3233-6631%3AROMS%2FN3DS%2FKirby_%20Planet%20Robobot%20(CTR-P-AT3A).cci
+[2026-09-30 19:03:21.217] [INFO] Player: Azahar (New) (org.azahar_emu.azahar/org.citra.citra_emu.activities.EmulationActivity)
+[2026-09-30 19:03:21.218] [INFO] External display: false
+[2026-09-30 19:03:21.220] [INFO] URI type: content=true, file=false, path=false
+[2026-09-30 19:03:21.223] [INFO] Resolved file: /storage/3233-6631/ROMS/N3DS/Kirby_ Planet Robobot (CTR-P-AT3A).cci (exists=true, hasRealPath=true)
+[2026-09-30 19:03:21.224] [INFO] {file.uri} → content://com.android.externalstorage.documents/tree/3233-6631%3AROMS/document/3233-6631%3AROMS%2FN3DS%2FKirby_%20Planet%20Robobot%20(CTR-P-AT3A).cci
+[2026-09-30 19:03:21.225] [INFO] {file.path} → /storage/3233-6631/ROMS/N3DS/Kirby_ Planet Robobot (CTR-P-AT3A).cci
+[2026-09-30 19:03:21.237] [INFO] Intent: action=android.intent.action.VIEW, data=content://com.android.externalstorage.documents/tree/3233-6631%3AROMS/document/3233-6631%3AROMS%2FN3DS%2FKirby_%20Planet%20Robobot%20(CTR-P-AT3A).cci, component=ComponentInfo{org.azahar_emu.azahar/org.citra.citra_emu.activities.EmulationActivity}
+[2026-09-30 19:03:21.238] [INFO] Intent extras: none
+[2026-09-30 19:03:21.243] [INFO] Granting tree URI permissions to org.azahar_emu.azahar
+[2026-09-30 19:03:21.245] [INFO] URI permission grants complete
+[2026-09-30 19:03:21.262] [INFO] Launch SUCCESS — taskId=null
+[2026-09-30 19:03:48.199] [----] ══════ Launch: 14 Robotron 2084 ══════
+[2026-09-30 19:03:48.201] [INFO] Game: 14 Robotron 2084 | File: 14. Robotron 2084 (USA).a52
+[2026-09-30 19:03:48.201] [INFO] ROM URI: content://com.android.externalstorage.documents/tree/3233-6631%3AROMS/document/3233-6631%3AROMS%2Fatari5200%2F14.%20Robotron%202084%20(USA).a52
+[2026-09-30 19:03:48.203] [INFO] Player: RetroArch (64 bits) - atari800 (com.retroarch.aarch64/com.retroarch.browser.retroactivity.RetroActivityFuture)
+[2026-09-30 19:03:48.203] [INFO] External display: false
+[2026-09-30 19:03:48.205] [INFO] URI type: content=true, file=false, path=false
+[2026-09-30 19:03:48.206] [INFO] Resolved file: /storage/3233-6631/ROMS/atari5200/14. Robotron 2084 (USA).a52 (exists=true, hasRealPath=true)
+[2026-09-30 19:03:48.207] [INFO] {file.uri} → content://com.android.externalstorage.documents/tree/3233-6631%3AROMS/document/3233-6631%3AROMS%2Fatari5200%2F14.%20Robotron%202084%20(USA).a52
+[2026-09-30 19:03:48.209] [INFO] {file.path} → /storage/3233-6631/ROMS/atari5200/14. Robotron 2084 (USA).a52
+[2026-09-30 19:03:48.220] [INFO] Intent: action=android.intent.action.VIEW, data=null, component=ComponentInfo{com.retroarch.aarch64/com.retroarch.browser.retroactivity.RetroActivityFuture}
+[2026-09-30 19:03:48.221] [INFO] Intent extras: DATADIR, SDCARD, EXTERNAL, APK, IME, ROM, CONFIGFILE, LIBRETRO
+[2026-09-30 19:03:48.225] [INFO] Granting tree URI permissions to com.retroarch.aarch64
+[2026-09-30 19:03:48.228] [INFO] URI permission grants complete
+[2026-09-30 19:03:48.243] [INFO] Launch SUCCESS — taskId=null
+[2026-09-30 19:04:08.746] [----] ══════ Swap: Breath of Fire ══════
+[2026-09-30 19:04:08.748] [INFO] Game: Breath of Fire | File: Breath of Fire (Europe) (En,Fr,De).zip
+[2026-09-30 19:04:08.749] [INFO] Player: RetroArch (64 bits) - mgba (com.retroarch.aarch64/com.retroarch.browser.retroactivity.RetroActivityFuture)
+[2026-09-30 19:04:08.751] [INFO] {file.uri} → content://com.android.externalstorage.documents/tree/3233-6631%3AROMS/document/3233-6631%3AROMS%2Fgba%2FBreath%20of%20Fire%20(Europe)%20(En%2CFr%2CDe).zip
+[2026-09-30 19:04:08.752] [INFO] {file.path} → /storage/3233-6631/ROMS/gba/Breath of Fire (Europe) (En,Fr,De).zip
+[2026-09-30 19:04:08.764] [INFO] Intent: action=android.intent.action.VIEW, data=null, component=ComponentInfo{com.retroarch.aarch64/com.retroarch.browser.retroactivity.RetroActivityFuture}
+[2026-09-30 19:04:08.766] [INFO] Intent extras: DATADIR, SDCARD, EXTERNAL, APK, IME, ROM, CONFIGFILE, LIBRETRO
+[2026-09-30 19:04:08.770] [INFO] Granting tree URI permissions to com.retroarch.aarch64
+[2026-09-30 19:04:08.773] [INFO] URI permission grants complete
+[2026-09-30 19:04:08.789] [INFO] Swap SUCCESS — taskId=null
+[2026-09-30 19:04:45.102] [----] ══════ Launch: Breath of Fire II ══════
+[2026-09-30 19:04:45.103] [INFO] Game: Breath of Fire II | File: Breath of Fire II (USA).zip
+[2026-09-30 19:04:45.104] [INFO] ROM URI: content://com.android.externalstorage.documents/tree/3233-6631%3AROMS/document/3233-6631%3AROMS%2Fgba%2FBreath%20of%20Fire%20II%20(USA).zip
+[2026-09-30 19:04:45.106] [INFO] Player: RetroArch (64 bits) - mgba (com.retroarch.aarch64/com.retroarch.browser.retroactivity.RetroActivityFuture)
+[2026-09-30 19:04:45.107] [INFO] External display: false
+[2026-09-30 19:04:45.108] [INFO] URI type: content=true, file=false, path=false
+[2026-09-30 19:04:45.109] [INFO] Resolved file: /storage/3233-6631/ROMS/gba/Breath of Fire II (USA).zip (exists=true, hasRealPath=true)
+[2026-09-30 19:04:45.110] [INFO] {file.uri} → content://com.android.externalstorage.documents/tree/3233-6631%3AROMS/document/3233-6631%3AROMS%2Fgba%2FBreath%20of%20Fire%20II%20(USA).zip
+[2026-09-30 19:04:45.111] [INFO] {file.path} → /storage/3233-6631/ROMS/gba/Breath of Fire II (USA).zip
+[2026-09-30 19:04:45.124] [INFO] Intent: action=android.intent.action.VIEW, data=null, component=ComponentInfo{com.retroarch.aarch64/com.retroarch.browser.retroactivity.RetroActivityFuture}
+[2026-09-30 19:04:45.125] [INFO] Intent extras: DATADIR, SDCARD, EXTERNAL, APK, IME, ROM, CONFIGFILE, LIBRETRO
+[2026-09-30 19:04:45.131] [INFO] Granting tree URI permissions to com.retroarch.aarch64
+[2026-09-30 19:04:45.133] [INFO] URI permission grants complete
+[2026-09-30 19:04:45.144] [INFO] Launch SUCCESS — taskId=null
+[2026-09-30 19:08:30.351] [----] ══════ Swap: Super Mario Advance ══════
+[2026-09-30 19:08:30.352] [INFO] Game: Super Mario Advance | File: Super Mario Advance (USA, Europe).zip
+[2026-09-30 19:08:30.353] [INFO] Player: RetroArch (64 bits) - mgba (com.retroarch.aarch64/com.retroarch.browser.retroactivity.RetroActivityFuture)
+[2026-09-30 19:08:30.355] [INFO] {file.uri} → content://com.android.externalstorage.documents/tree/3233-6631%3AROMS/document/3233-6631%3AROMS%2Fgba%2FSuper%20Mario%20Advance%20(USA%2C%20Europe).zip
+[2026-09-30 19:08:30.356] [INFO] {file.path} → /storage/3233-6631/ROMS/gba/Super Mario Advance (USA, Europe).zip
+[2026-09-30 19:08:30.366] [INFO] Intent: action=android.intent.action.VIEW, data=null, component=ComponentInfo{com.retroarch.aarch64/com.retroarch.browser.retroactivity.RetroActivityFuture}
+[2026-09-30 19:08:30.367] [INFO] Intent extras: DATADIR, SDCARD, EXTERNAL, APK, IME, ROM, CONFIGFILE, LIBRETRO
+[2026-09-30 19:08:30.372] [INFO] Granting tree URI permissions to com.retroarch.aarch64
+[2026-09-30 19:08:30.374] [INFO] URI permission grants complete
+[2026-09-30 19:08:30.385] [INFO] Swap SUCCESS — taskId=null

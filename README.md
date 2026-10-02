@@ -45,4 +45,5 @@ Then open **Extended mode** in the app and pair it with wireless debugging.
 ## Notes
 
 - Made for the AYN Thor (Android 13). The app drives the joystick LED controllers directly, so a firmware update could change how it works.
+- It probably also works on other AYN devices with joystick LEDs, such as the Odin series, but I haven't tested it.
 - Not affiliated with AYN. Use at your own risk.

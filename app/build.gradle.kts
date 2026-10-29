@@ -14,10 +14,15 @@ android {
         applicationId = "pl.mateuszkaflowski.ambiled"
         minSdk = 33
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    // Keep a device's existing signing identity when building on another computer.
+    providers.gradleProperty("ambianalogKeystore").orNull?.let { path ->
+        signingConfigs.getByName("debug").storeFile = file(path)
     }
 
     buildTypes {

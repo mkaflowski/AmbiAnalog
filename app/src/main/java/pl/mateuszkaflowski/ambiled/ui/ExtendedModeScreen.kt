@@ -116,6 +116,18 @@ fun ExtendedModeScreen(onBack: () -> Unit) {
 
             if (paired) {
                 SyncStatus(lastSync, controlEnabled.enabled)
+                Card(
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh),
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                        Text(stringResource(R.string.offline_title), style = MaterialTheme.typography.titleMedium)
+                        Text(stringResource(R.string.offline_body), style = MaterialTheme.typography.bodyMedium)
+                        CommandBox("adb shell setprop persist.adb.tcp.port 5555")
+                        CommandBox("adb tcpip 5555")
+                        Text(stringResource(R.string.offline_details), style = MaterialTheme.typography.bodySmall)
+                    }
+                }
             }
 
             StepCard(

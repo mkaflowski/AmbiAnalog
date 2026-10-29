@@ -42,6 +42,49 @@ adb shell appops set pl.mateuszkaflowski.ambiled PROJECT_MEDIA allow
 
 Then open **Extended mode** in the app and pair it with wireless debugging.
 
+### Extended mode without Wi-Fi
+
+After pairing once, the Thor can run the full extended mode offline, including ROM detection
+and saving colors to the system. Enable persistent ADB TCP from a computer:
+
+```bash
+adb shell setprop persist.adb.tcp.port 5555
+adb tcpip 5555
+```
+
+Keep **USB debugging** enabled so adbd starts on boot; a USB cable is not needed afterwards.
+The app automatically prefers the configured TCP port on `127.0.0.1`, using the same pairing
+key, and falls back to wireless debugging if TCP is unavailable. Test the connection in
+**Extended mode** with Wi-Fi off, including after a reboot. Persistent TCP depends on the
+device firmware; this setup is intended for the Thor.
+
+The TCP listener is device-wide, remains enabled when the app closes, and listens on network
+interfaces too. ADB key authorization remains enabled; the app itself connects over loopback.
+To turn TCP off and return to wireless debugging:
+
+```bash
+adb shell setprop persist.adb.tcp.port -1
+adb usb
+```
+
+If Android forgets pairing after a long break, disable its ADB authorization timeout once:
+
+```bash
+adb shell settings put global adb_allowed_connection_time 0
+```
+
+This applies to all saved ADB keys. Pair again if Android has already removed the app's key.
+
+### Building with an existing debug signing key
+
+To update an existing installation from another computer without losing its data:
+
+```bash
+./gradlew assembleRelease -PambianalogKeystore=/path/to/debug.keystore
+```
+
+The key must match the installed APK. The default Android debug alias and passwords are used.
+
 ## Notes
 
 - Made for the AYN Thor (Android 13). The app drives the joystick LED controllers directly, so a firmware update could change how it works.

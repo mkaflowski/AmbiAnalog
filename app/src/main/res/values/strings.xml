@@ -63,7 +63,7 @@
     <string name="source_icon">Colors from the icon</string>
     <string name="custom_colors_for_game">Own colors for this game</string>
     <string name="back">← Back</string>
-    <string name="extended_intro">The app connects to this device\'s wireless debugging (like Shizuku) and saves the colors in the system settings, so they stay after the app closes and after a restart.</string>
+    <string name="extended_intro">The app connects to this device\'s ADB and saves the colors in the system settings, so they stay after the app closes and after a restart. Pair once using wireless debugging; optional TCP setup below also works without Wi-Fi.</string>
     <string name="step_toggle_title">1. Permission to toggle debugging</string>
     <string name="step_toggle_done">Granted - wireless debugging is turned on only while the app needs it.</string>
     <string name="step_toggle_body">Recommended. Without it wireless debugging has to stay on all the time. Run once from a computer:</string>
@@ -87,6 +87,9 @@
     <string name="connection_error">Connection error: %1$s</string>
     <string name="test_connection">Test connection</string>
     <string name="forget_pairing">Forget pairing</string>
+    <string name="offline_title">Extended mode without Wi-Fi</string>
+    <string name="offline_body">Optional, after pairing. Run these commands once from a computer, then test the connection with Wi-Fi off. On the Thor, persistent ADB TCP also starts after a reboot; keep USB debugging enabled.</string>
+    <string name="offline_details">The app connects internally through 127.0.0.1 using its existing pairing key. The device-wide TCP port stays enabled when the app closes and also listens on network interfaces, with ADB key authorization. Other firmware may not support the persistent setting.</string>
     <string name="sync_needs_control">Color sync works while app control is on.</string>
     <string name="sync_failed">Last color save failed: %1$s</string>
     <string name="sync_ok">Colors saved in the system settings.</string>

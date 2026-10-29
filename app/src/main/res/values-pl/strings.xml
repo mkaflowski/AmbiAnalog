@@ -61,7 +61,7 @@
     <string name="source_icon">Kolory z ikony</string>
     <string name="custom_colors_for_game">Własne kolory dla tej gry</string>
     <string name="back">← Wróć</string>
-    <string name="extended_intro">Aplikacja łączy się z debugowaniem bezprzewodowym tego urządzenia (jak Shizuku) i zapisuje kolory w ustawieniach systemu. Dzięki temu zostają po zamknięciu aplikacji i po restarcie.</string>
+    <string name="extended_intro">Aplikacja łączy się z ADB tego urządzenia i zapisuje kolory w ustawieniach systemu. Dzięki temu zostają po zamknięciu aplikacji i po restarcie. Sparuj ją raz przez debugowanie bezprzewodowe; opcjonalna konfiguracja TCP poniżej pozwala też działać bez Wi-Fi.</string>
     <string name="step_toggle_title">1. Uprawnienie do przełączania debugowania</string>
     <string name="step_toggle_done">Nadane - debugowanie bezprzewodowe jest włączane tylko wtedy, gdy aplikacja go potrzebuje.</string>
     <string name="step_toggle_body">Zalecane. Bez niego debugowanie bezprzewodowe musi być cały czas włączone. Uruchom raz z komputera:</string>
@@ -85,6 +85,9 @@
     <string name="connection_error">Błąd połączenia: %1$s</string>
     <string name="test_connection">Testuj połączenie</string>
     <string name="forget_pairing">Zapomnij parowanie</string>
+    <string name="offline_title">Tryb rozszerzony bez Wi-Fi</string>
+    <string name="offline_body">Opcjonalnie, po sparowaniu. Uruchom raz te polecenia z komputera, a potem przetestuj połączenie przy wyłączonym Wi-Fi. Na Thorze trwałe ADB TCP uruchamia się też po restarcie; pozostaw włączone debugowanie USB.</string>
+    <string name="offline_details">Aplikacja łączy się wewnętrznie przez 127.0.0.1, używając dotychczasowego klucza parowania. Systemowy port TCP pozostaje włączony po zamknięciu aplikacji i nasłuchuje również na interfejsach sieciowych, z autoryzacją kluczem ADB. Inny firmware może nie obsługiwać trwałego ustawienia.</string>
     <string name="sync_needs_control">Synchronizacja kolorów działa, gdy włączone jest sterowanie przez aplikację.</string>
     <string name="sync_failed">Ostatni zapis kolorów się nie udał: %1$s</string>
     <string name="sync_ok">Kolory zapisane w ustawieniach systemu.</string>

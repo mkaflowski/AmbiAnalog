@@ -4,10 +4,12 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.provider.Settings
+import android.util.Log
 import com.flyfishxu.kadb.Kadb
 import com.flyfishxu.kadb.cert.KadbCert
 import com.flyfishxu.kadb.cert.OkioFilePrivateKeyStore
 import com.flyfishxu.kadb.shell.AdbShellResponse
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -22,9 +24,10 @@ import okio.Path.Companion.toPath
 import java.io.File
 
 /**
- * Runs shell commands with adb's `shell` uid by connecting to this device's own wireless
- * debugging, like Shizuku does. Needs a one-time pairing ([pair]); with WRITE_SECURE_SETTINGS
- * (granted once over adb) wireless debugging is switched on only while it's needed.
+ * Runs shell commands with adb's `shell` uid on this device. Prefers an already configured
+ * TCP listener (works without Wi-Fi), otherwise uses wireless debugging, like Shizuku.
+ * Both transports use the same key from the one-time pairing ([pair]). With
+ * WRITE_SECURE_SETTINGS, wireless debugging is switched on only while it's needed.
  *
  * Every new connection makes the system post a "Wireless debugging connected" notification on
  * a channel users can't silence (sound and vibration). So while the LED service runs the
@@ -33,12 +36,15 @@ import java.io.File
  */
 object AdbShell {
 
+    private const val TAG = "AdbShell"
     private const val ADB_WIFI_ENABLED = "adb_wifi_enabled"
     private const val PREFS = "adb_shell"
     private const val KEY_ENABLED_BY_US = "wireless_debugging_enabled_by_us"
     private const val DISCOVERY_TIMEOUT_MS = 10_000L
     private const val PORT_POLL_INTERVAL_MS = 200L
     private const val IDLE_CLOSE_MS = 15_000L
+    private const val CONNECT_TIMEOUT_MS = 2_000
+    private const val SOCKET_TIMEOUT_MS = 10_000
 
     // adbd listens on all interfaces; loopback avoids a round trip through the Wi-Fi stack.
     private const val LOCALHOST = "127.0.0.1"
@@ -84,6 +90,8 @@ object AdbShell {
                 if (reused != null) {
                     try {
                         return@withLock block(reused)
+                    } catch (e: CancellationException) {
+                        throw e
                     } catch (e: Exception) {
                         // Dropped meanwhile (adbd restarted, debugging switched off): start over once.
                         closeConnection(context)
@@ -105,14 +113,37 @@ object AdbShell {
     }
 
     private suspend fun openConnection(context: Context): Kadb {
+        val tcpPort = AdbPorts.tcp(
+            readProperty("service.adb.tcp.port"),
+            readProperty("persist.adb.tcp.port"),
+        )
+        if (tcpPort != null) {
+            // Kadb.create is lazy: authenticate before choosing this transport. A stale property
+            // must not prevent falling back to wireless debugging. Never toggle Wi-Fi for TCP.
+            val tcp = createClient(tcpPort)
+            try {
+                check(tcp.shell("true").exitCode == 0) { "ADB TCP connection check failed" }
+                connection = tcp
+                Log.i(TAG, "Connected over ADB TCP at $LOCALHOST:$tcpPort (Wi-Fi not required)")
+                return tcp
+            } catch (e: Exception) {
+                runCatching { tcp.close() }
+                if (e is CancellationException) throw e
+                Log.w(TAG, "ADB TCP at port $tcpPort unavailable; trying wireless debugging", e)
+            }
+        }
         if (!isWirelessDebuggingEnabled(context) && canToggleWirelessDebugging(context)) {
             // Written synchronously so a kill right after enabling still leaves the marker.
             prefs(context).edit().putBoolean(KEY_ENABLED_BY_US, true).commit()
             setWirelessDebugging(context, true)
             enabledWirelessDebugging = true
         }
-        return Kadb.create(LOCALHOST, waitForTlsPort()).also { connection = it }
+        return createClient(waitForTlsPort()).also { connection = it }
     }
+
+    private fun createClient(port: Int) = Kadb.create(
+        LOCALHOST, port, connectTimeout = CONNECT_TIMEOUT_MS, socketTimeout = SOCKET_TIMEOUT_MS,
+    )
 
     /** Must be called holding [lock]. */
     private fun closeConnection(context: Context) {
@@ -165,11 +196,13 @@ object AdbShell {
         @Suppress("UNREACHABLE_CODE") error("unreachable")
     }
 
-    private fun readTlsPort(): Int? = runCatching {
-        ProcessBuilder("getprop", "service.adb.tls.port").start()
+    private fun readTlsPort(): Int? = AdbPorts.parse(readProperty("service.adb.tls.port"))
+
+    private fun readProperty(name: String): String = runCatching {
+        ProcessBuilder("getprop", name).start()
             .inputStream.bufferedReader().use { it.readText() }
-            .trim().toIntOrNull()?.takeIf { it > 0 }
-    }.getOrNull()
+            .trim()
+    }.getOrDefault("")
 
     private fun configure(context: Context) {
         if (configured) return

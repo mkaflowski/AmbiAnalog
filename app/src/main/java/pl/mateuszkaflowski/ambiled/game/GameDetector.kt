@@ -113,7 +113,7 @@ class GameDetector(private val context: Context, private val scope: CoroutineSco
      * Where the running game comes from, in order:
      * 1. the ROM in the intent data (Azahar, Eden started from Cocoon…);
      * 2. Cocoon's launch log, if Cocoon started the emulator (RetroArch gets the ROM in extras);
-     * 3. the emulator's own log, for yuzu forks started from their own menu;
+     * 3. the emulator's own log, for yuzu forks started from their own menu, and Banana Native's;
      * 4. the app itself, if it's an Android game and not an emulator sitting in its menu.
      */
     private suspend fun resolveWithShell(): CurrentGame? = AdbShell.withShell(context) { kadb ->
@@ -132,7 +132,12 @@ class GameDetector(private val context: Context, private val scope: CoroutineSco
             top.activity == YuzuLog.EMULATION_ACTIVITY ->
                 YuzuLog.parse(kadb.shell(YuzuLog.shellCommand(top.packageName)).output)
                     ?.let { switchGame(kadb, it, top.packageName) }
+            top.activity.endsWith(BananaNativeLog.GAME_ACTIVITY_SUFFIX) ->
+                BananaNativeLog.parse(kadb.shell(BananaNativeLog.shellCommand(top.packageName)).output)
+                    ?.let { switchGame(kadb, it, top.packageName, iconFallback = true) }
             top.packageName in emulatorPackages -> null
+            // Banana Native's own screens (Home, setup): not a game, but colored like its icon.
+            top.packageName in BananaNativeLog.PACKAGES -> appGame(top.packageName, anyApp = true)
             else -> appGame(top.packageName)
         }
     }
@@ -147,12 +152,17 @@ class GameDetector(private val context: Context, private val scope: CoroutineSco
         return withColors(id, title, rom.platform, packageName, artwork, titleId?.let { "$SWITCH_ID_PREFIX$it" })
     }
 
-    private fun switchGame(kadb: Kadb, game: YuzuGame, packageName: String): CurrentGame {
+    private fun switchGame(
+        kadb: Kadb,
+        game: YuzuGame,
+        packageName: String,
+        iconFallback: Boolean = false,
+    ): CurrentGame {
         val id = SWITCH_ID_PREFIX + (game.titleId ?: game.title)
         val artwork = GameArtwork.cachedArtwork(context, id) ?: game.titleId?.let {
             GameArtwork.copyArtwork(context, kadb, id, ArtworkMatch.patternsForTitleId(it), SWITCH_SYSTEM)
         }
-        return withColors(id, game.title, "Switch", packageName, artwork)
+        return withColors(id, game.title, "Switch", packageName, artwork, iconFallback = iconFallback)
     }
 
     private fun withColors(
@@ -162,9 +172,12 @@ class GameDetector(private val context: Context, private val scope: CoroutineSco
         packageName: String,
         cover: File?,
         presetId: String? = null,
+        iconFallback: Boolean = false,
     ): CurrentGame {
         val auto = GameProfiles.cachedAuto(id)
             ?: cover?.let(GameArtwork::colorsFromFile)?.also { GameProfiles.cacheAuto(id, it) }
+            // Not cached under the game: a cover found later should still win.
+            ?: if (iconFallback) GameArtwork.colorsFromAppIcon(context, packageName) else null
         val preset = BundledGameColors.forId(id) ?: presetId?.let(BundledGameColors::forId)
         return CurrentGame(id, title, platform, packageName, cover, auto, preset, GameProfiles.custom(id))
     }
@@ -172,11 +185,11 @@ class GameDetector(private val context: Context, private val scope: CoroutineSco
     private fun resolveFromEvents(): CurrentGame? =
         resumed.lastOrNull { it !in ignoredPackages }?.let(::appGame)
 
-    /** Android apps count as games only when they declare the game category. */
-    private fun appGame(packageName: String): CurrentGame? {
+    /** Android apps count as games only when they declare the game category (or [anyApp]). */
+    private fun appGame(packageName: String, anyApp: Boolean = false): CurrentGame? {
         val info = runCatching { context.packageManager.getApplicationInfo(packageName, 0) }.getOrNull()
             ?: return null
-        if (info.category != ApplicationInfo.CATEGORY_GAME) return null
+        if (!anyApp && info.category != ApplicationInfo.CATEGORY_GAME) return null
         val id = APP_ID_PREFIX + packageName
         val auto = GameProfiles.cachedAuto(id)
             ?: GameArtwork.colorsFromAppIcon(context, packageName)?.also { GameProfiles.cacheAuto(id, it) }

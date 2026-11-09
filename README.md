@@ -31,6 +31,18 @@ English and Polish.
 
 Download the APK from [Releases](https://github.com/mkaflowski/AmbiAnalog/releases/latest) and install it on the Thor.
 
+### Updates with Obtainium
+
+[Obtainium](https://github.com/ImranR98/Obtainium) installs and updates the app straight from GitHub releases. On the Thor, open this link (or add the repository URL by hand in Obtainium):
+
+[<img src="https://raw.githubusercontent.com/ImranR98/Obtainium/main/assets/graphics/badge_obtainium.png" height="54" alt="Get it on Obtainium">](https://apps.obtainium.imranr.dev/redirect?r=obtainium://app/%7B%22id%22%3A%22pl.mateuszkaflowski.ambiled%22%2C%22url%22%3A%22https%3A%2F%2Fgithub.com%2Fmkaflowski%2FAmbiAnalog%22%2C%22author%22%3A%22mkaflowski%22%2C%22name%22%3A%22AmbiAnalog%22%2C%22preferredApkIndex%22%3A0%2C%22additionalSettings%22%3A%22%7B%7D%22%7D)
+
+```text
+https://github.com/mkaflowski/AmbiAnalog
+```
+
+Releases are signed with the same key every time, so Obtainium updates keep your settings and pairing.
+
 Optional, once, from a computer:
 
 ```bash
